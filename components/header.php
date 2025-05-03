@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $current_file = basename($_SERVER['PHP_SELF']);
 $is_in_pages = strpos($_SERVER['REQUEST_URI'], '/pages/') !== false;
 $base_path = $is_in_pages ? '../' : '';

@@ -8,12 +8,17 @@ include_once __DIR__ . '/../components/header.php';
         <div class="decoration bottom floating"></div>
         <div class="decoration middle"></div>
 
+        <?php
+        if(isset($error)){
+            echo $error;
+        }
+        ?>
         <div class="signup-header">
             <h1>Create Your Account</h1>
             <p>Join our community today!</p>
         </div>
 
-        <form class="signup-form" id="signupForm">
+        <form class="signup-form" id="signupForm" action="../handlers/signup-handler.php" method="POST">
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
@@ -70,41 +75,6 @@ include_once __DIR__ . '/../components/header.php';
 </div>
 
 <script>
-    // Mobile menu toggle
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('.nav-menu').classList.toggle('active');
-    });
-
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // Simple validation
-        const requiredFields = ['firstName', 'lastName', 'email', 'password', 'securityQuestion', 'securityAnswer', 'gender'];
-        let isValid = true;
-
-        requiredFields.forEach(field => {
-            const element = document.getElementById(field);
-            if (!element.value.trim()) {
-                element.style.borderColor = 'var(--danger)';
-                isValid = false;
-            } else {
-                element.style.borderColor = 'var(--success)';
-            }
-        });
-
-        if (isValid) {
-            alert('Form submitted successfully!');
-            // Here you would normally send the data to your server
-            // For demo purposes, we'll just reset the form
-            this.reset();
-            requiredFields.forEach(field => {
-                document.getElementById(field).style.borderColor = '#e1e5eb';
-            });
-        } else {
-            alert('Please fill in all required fields.');
-        }
-    });
-
     // Add animation to form elements
     const formControls = document.querySelectorAll('.form-control');
     formControls.forEach(control => {
